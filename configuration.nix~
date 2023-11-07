@@ -308,7 +308,7 @@ services.avahi.nssmdns = true;
      gnome3.gnome-tweaks
      git
      tailscale
-     nix-software-center
+#    nix-software-center
      appimage-run
      neofetch
      steamcmd
@@ -349,15 +349,15 @@ services.avahi.nssmdns = true;
      nextcloud-client
    ];
 
-  containers.wasabi = {
-    ephemeral = true;
-    autoStart = true;
-    config = { config, pkgs, ... }: {
-        services.httpd.enable = true;
-        services.httpd.adminAddr = "foo@example.org";
-        networking.firewall.allowedTCPPorts = [ 80 ];
-    };
-  };
+#  containers.wasabi = {
+#    ephemeral = true;
+#    autoStart = true;
+#    config = { config, pkgs, ... }: {
+#        services.httpd.enable = true;
+#        services.httpd.adminAddr = "foo@example.org";
+#        networking.firewall.allowedTCPPorts = [ 80 ];
+#    };
+#  };
 
 
 

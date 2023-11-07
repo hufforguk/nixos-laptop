@@ -347,17 +347,18 @@ services.avahi.nssmdns = true;
      metasploit
      nmap
      nextcloud-client
+     home-manager
    ];
 
-  containers.wasabi = {
-    ephemeral = true;
-    autoStart = true;
-    config = { config, pkgs, ... }: {
-        services.httpd.enable = true;
-        services.httpd.adminAddr = "foo@example.org";
-        networking.firewall.allowedTCPPorts = [ 80 ];
-    };
-  };
+#  containers.wasabi = {
+#    ephemeral = true;
+#    autoStart = true;
+#    config = { config, pkgs, ... }: {
+#        services.httpd.enable = true;
+#        services.httpd.adminAddr = "foo@example.org";
+#        networking.firewall.allowedTCPPorts = [ 80 ];
+#    };
+#  };
 
 
 
