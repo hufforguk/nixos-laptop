@@ -42,7 +42,7 @@
   home-manager = {
     extraSpecialArgs = { inherit inputs; };
     users = {
-      huff = inport ~/.dotfiles/home-manager/home.nix;
+      huff = import home-manager/home.nix;
     };
   };
 
