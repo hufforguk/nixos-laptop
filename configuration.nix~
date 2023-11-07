@@ -347,6 +347,7 @@ services.avahi.nssmdns = true;
      metasploit
      nmap
      nextcloud-client
+     home-manager
    ];
 
 #  containers.wasabi = {
