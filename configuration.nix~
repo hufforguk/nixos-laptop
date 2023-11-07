@@ -4,6 +4,10 @@
 
 { inputs, config, pkgs, lib,  ... }:
 
+
+
+nixpkgs.config.permittedInsecurePackages = [ "electron-24.8.6" ];
+              
 #let
 #  unstableTarball =
 #    fetchTarball
@@ -43,7 +47,7 @@
   home-manager = {
     extraSpecialArgs = { inherit inputs; };
     users = {
-      huff = import ./home.nix;
+      huff = import ./home-manager/home.nix;
     };
   };
 
