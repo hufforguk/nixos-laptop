@@ -284,8 +284,8 @@
     nixfmt
     pavucontrol
     helvum
-    kate
-    kwrite
+    libsForQt5.kate
+   libsForQt5.kwrited
   ];
 
   programs.steam = {
