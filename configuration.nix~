@@ -282,6 +282,8 @@
     nextcloud-client
     home-manager
     nixfmt
+    pavucontrol
+    helvum
   ];
 
   programs.steam = {

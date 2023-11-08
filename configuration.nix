@@ -284,6 +284,8 @@
     nixfmt
     pavucontrol
     helvum
+    kate
+    kwrite
   ];
 
   programs.steam = {
