@@ -1,6 +1,6 @@
 {
   description = "My First Flake";
- 
+
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-23.05";
 
@@ -9,22 +9,19 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-  
   };
-  
 
-  outputs = { self, nixpkgs, ...  }@inputs: 
-    let
-      lib = nixpkgs.lib;
+  outputs = { self, nixpkgs, ... }@inputs:
+    let lib = nixpkgs.lib;
     in {
 
-  nixosConfigurations = {
-      huff-nixos-laptop = lib.nixosSystem {
-        specialArgs = { inherit inputs; };
-        system="x86_64-linux";
-        modules = [ ./configuration.nix ];
+      nixosConfigurations = {
+        huff-nixos-laptop = lib.nixosSystem {
+          specialArgs = { inherit inputs; };
+          system = "x86_64-linux";
+          modules = [ ./configuration.nix ];
+        };
       };
     };
-  };
 }
 

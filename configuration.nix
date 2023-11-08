@@ -54,11 +54,12 @@
   # Enable the X11 windowing system & the Plasma 5 Desktop Environment
   services.xserver = {
     enable = true;
-    displayManager.gdm.enable = true;
-    desktopManager.gnome.enable = true;
+    displayManager.sddm.enable = true;
+#    desktopManager.gnome.enable = true;
+    desktopManager.plasma5.enable = true;
   };
 
-  # programs.kdeconnect.enable = true;
+  programs.kdeconnect.enable = true;
   hardware.bluetooth.enable = true;
   services.blueman.enable = true;
 
@@ -114,7 +115,7 @@
   #]
 
   # XDG portal
-  xdg.portal.enable = true;
+  # xdg.portal.enable = true;
   # xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-kde ];
 
   services.avahi.enable = true;
@@ -280,6 +281,9 @@
     nmap
     nextcloud-client
     home-manager
+    nixfmt
+    pavucontrol
+    helvum
   ];
 
   programs.steam = {
