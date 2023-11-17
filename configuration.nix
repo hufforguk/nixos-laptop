@@ -172,17 +172,17 @@
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.huff = {
-    isNormalUser = true;
-    initialPassword = "pw321";
-    extraGroups = [
-      "wheel"
-      "libvirtd"
-      "docker"
-      "tty"
-      "dialout"
-      "networkmanager"
-      "lp"
-      "scanner"
+      isNormalUser = true;
+      initialPassword = "pw321";
+      extraGroups = [
+        "wheel"
+        "libvirtd"
+        "docker"
+        "tty"
+        "dialout"
+        "networkmanager"
+        "lp"
+        "scanner"
     ]; # Enable ‘sudo’ for the user.
     packages = with pkgs;
       [
@@ -190,6 +190,7 @@
         #thunderbird
       ];
   };
+ 
   services.tailscale.enable = true;
   virtualisation.docker.enable = true;
 #  services.flatpak.enable = true;
@@ -278,7 +279,7 @@
     # swww
     usbutils
     electrum
-    # latte-dock
+    latte-dock
     yt-dlp
     hugo
     hugin
@@ -298,6 +299,7 @@
     helvum
    # libsForQt5.kate
    # libsForQt5.kwrited
+    raysession
   ];
 
   programs.steam = {
