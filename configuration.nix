@@ -25,6 +25,7 @@
   boot.supportedFilesystems = [ "zfs" ];
   boot.zfs.requestEncryptionCredentials = true;
   # boot.supportedFilesystems = [ "ntfs" ];
+  # boot.kernelPackages = pkgs.linuxPackages_zen;
 
   boot.initrd.systemd.enable = true;
   boot.plymouth.enable = true;
@@ -215,7 +216,7 @@
     gcompris
     krita
     alacritty
-    #bitwarden
+    # bitwarden
     # bottles
     # steam
     tmux
@@ -301,6 +302,7 @@
    # libsForQt5.kwrited
     raysession
     mame
+    wireguard-tools
   ];
   #nixpkgs.overlays = with pkgs; [
   #    (self: super: {
