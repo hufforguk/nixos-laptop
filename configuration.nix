@@ -303,6 +303,7 @@
     raysession
     mame
     wireguard-tools
+    quickemu
   ];
   #nixpkgs.overlays = with pkgs; [
   #    (self: super: {

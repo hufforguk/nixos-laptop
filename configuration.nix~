@@ -216,7 +216,7 @@
     gcompris
     krita
     alacritty
-    #bitwarden
+    # bitwarden
     # bottles
     # steam
     tmux
@@ -302,6 +302,7 @@
    # libsForQt5.kwrited
     raysession
     mame
+    wireguard-tools
   ];
   #nixpkgs.overlays = with pkgs; [
   #    (self: super: {
