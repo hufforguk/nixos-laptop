@@ -304,6 +304,7 @@
     mame
     wireguard-tools
     quickemu
+    jellyfin-mpv-shim
   ];
   #nixpkgs.overlays = with pkgs; [
   #    (self: super: {
