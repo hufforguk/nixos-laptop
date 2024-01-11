@@ -215,21 +215,38 @@
   programs.nixvim = {
     extraPlugins = with pkgs.vimPlugins; [
       vim-nix
+    #  neotree
+    #  fugative
+    #  nvim-cmp
+
     ];
-     colorschemes.gruvbox.enable = true;
-     plugins.lsp = {
-       enable = true;
-       servers = {
-         #javascript/typescript
-         tsserver.enable = true;
+    enableMan = true;
 
-         # lua
-         lua-ls.enable = true;
+    colorschemes.gruvbox.enable = true;
 
-         #rust
-         rust-analyzer.enable = true;
-       };
-     };
+    plugins = {
+      fugitive.enable = true;
+      openscad.enable = true;
+      neo-tree.enable = true;
+
+      lsp = {
+        enable = true;
+        servers = {
+          #javascript/typescript
+          tsserver.enable = true;
+
+          # lua
+          lua-ls.enable = true;
+
+          #rust
+          rust-analyzer = {
+            enable = true;
+            installCargo = true;
+            installRustc = true;
+          };
+        };
+      };
+    };
 
     
   };
@@ -260,6 +277,8 @@
     freecad
     mpv
     vlc
+    ffmpeg
+    mpvc
     deja-dup
     duplicity
     gimp
@@ -358,7 +377,10 @@
     quickemu
     jellyfin-mpv-shim
     inputs.nix-gaming.packages.${pkgs.system}.rocket-league
+    cargo
+    rustc
   ];
+
   #nixpkgs.overlays = with pkgs; [
   #    (self: super: {
   #      mpv-unwrapped = super.mpv-unwrapped.override {
