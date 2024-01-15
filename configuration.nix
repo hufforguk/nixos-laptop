@@ -41,6 +41,11 @@
 
   services.zfs.autoScrub.enable = true;
 
+  services.gvfs.enable = true;
+  services.devmon.enable = true;
+  services.udisks2.enable = true;
+
+
   networking.hostName = "huff-nixos-laptop"; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -254,9 +259,9 @@
   services.tailscale = {
     enable = true;
     extraUpFlags = [
-      "--exit-node=100.93.77.129"
-      "--exit-node-allow-lan-access" 
-      "--accept-route"
+      "--exit-node=" # 100.93.77.129"
+     # "--exit-node-allow-lan-access" 
+     # "--accept-route"
     ];
 
     
@@ -277,6 +282,8 @@
     freecad
     mpv
     vlc
+    libdvdread
+    libdvdcss
     ffmpeg
     mpvc
     deja-dup
@@ -336,7 +343,7 @@
     # lmms
     # obs-studio
     virt-manager
-    git
+    gitFull
     tailscale
     tailscale-systray
     appimage-run
@@ -379,6 +386,12 @@
     inputs.nix-gaming.packages.${pkgs.system}.rocket-league
     cargo
     rustc
+    lshw
+    kicad
+    kicadAddons.kikit
+    kicadAddons.kikit-library
+    #python311Packages.cadquery
+    #cq-editor
   ];
 
   #nixpkgs.overlays = with pkgs; [
@@ -418,10 +431,12 @@
   networking.firewall.enable = false;
 
   
-    nix.settings = {
-      substituters = ["https://nix-gaming.cachix.org"];
-      trusted-public-keys = ["nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="];
-      };
+  nix.settings = {
+    substituters = ["https://nix-gaming.cachix.org"];
+    trusted-public-keys = ["nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="];
+    #substituters = ["https://hyprland.cachix.org"];
+    #trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
+    };
    
 
 
