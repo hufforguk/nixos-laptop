@@ -11,7 +11,7 @@
     # ./scanner.nix
     inputs.nixvim.nixosModules.nixvim
     inputs.nix-gaming.nixosModules.pipewireLowLatency
-    
+    # ./core.nix
   ];
   home-manager = {
     extraSpecialArgs = { inherit inputs; };
@@ -96,11 +96,10 @@
     permittedInsecurePackages = [ "electron-24.8.6" ];
   };
 
-  #  programs.hyprland = {
-  #    enable = true;
-  #    xwayland.enable = true;
-  #    nvidiaPatches = true;
-  #  };
+    programs.hyprland = {
+      enable = true;
+      xwayland.enable = true;
+    };
   environment.sessionVariables = {
     # If your cursor becomes invisible
     WLR_NO_HARDWARE_CURSORS = "1";
@@ -273,10 +272,23 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    vim_configurable
+    home-manager
+    nixfmt
+    htop
+    tmux
+    wget
+    emacs
+    mc
+    gitFull
+    tailscale
+    neofetch
+    usbutils
+    dig
+    nmap
+    whois
     # monero-gui
     # neovim
-    vim_configurable
-    wget
     firefox
     evolution
     freecad
@@ -285,7 +297,7 @@
     libdvdread
     libdvdcss
     ffmpeg
-    mpvc
+    # mpvc # - could not get to work?? 
     deja-dup
     duplicity
     gimp
@@ -297,10 +309,9 @@
     # bitwarden
     # bottles
     # steam
-    tmux
     # wine
     # lutris
-    cura
+    #cura
     prusa-slicer
     remmina
     scribus
@@ -311,10 +322,9 @@
     distrobox
     # winetricks
     # protontricks
-    emacs
     transmission-remote-gtk
-    steam-rom-manager
-    retroarchFull
+    # steam-rom-manager
+    #retroarchFull
     openscad
     audacity
     ardour
@@ -322,44 +332,38 @@
     dia
     drawio
     librecad
-    sweethome3d.application
-    sweethome3d.textures-editor
-    sweethome3d.furniture-editor
+    # sweethome3d.application
+    #sweethome3d.textures-editor
+    # sweethome3d.furniture-editor
     # qlcplus
     # xbill
     # atanks
     libreoffice-fresh
     darktable
     # monero-gui
-    # electrum
-    heroic
-    gogdl
-    htop
+    electrum
+    # heroic
+    # gogdl
     nvtop-nvidia
     rpi-imager
-    kdenlive
+    # kdenlive
     # kodi
-    mc
     # lmms
     # obs-studio
     virt-manager
-    gitFull
-    tailscale
     tailscale-systray
     appimage-run
-    neofetch
-    steamcmd
-    steam-tui
-    # kitty
-    # hypr
-    # rofi
-    # waybar
+    # steamcmd
+    # steam-tui
+    kitty
+    hypr
+     rofi
+    waybar
     docker
     libnotify
-    # swww
-    usbutils
+    swww
     electrum
-    # latte-dock
+    latte-dock
     yt-dlp
     hugo
     hugin
@@ -368,30 +372,25 @@
     virtiofsd
     # opensc
     # patchelf
-    dig
-    whois
     # metasploit
-    nmap
     nextcloud-client
-    home-manager
-    nixfmt
     pavucontrol
     helvum
     libsForQt5.kate
     raysession
-    mame
+    # mame
     wireguard-tools
     quickemu
     jellyfin-mpv-shim
-    inputs.nix-gaming.packages.${pkgs.system}.rocket-league
+    # inputs.nix-gaming.packages.${pkgs.system}.rocket-league
     cargo
     rustc
     lshw
     kicad
     kicadAddons.kikit
     kicadAddons.kikit-library
-    #python311Packages.cadquery
-    #cq-editor
+    # python311Packages.cadquery
+    # cq-editor
   ];
 
   #nixpkgs.overlays = with pkgs; [
@@ -402,13 +401,13 @@
   #    })
   #  ];
 
-  programs.steam = {
-    enable = true;
-    remotePlay.openFirewall =
-      true; # Open ports in the firewall for Steam Remote Play
-    dedicatedServer.openFirewall =
-      true; # Open ports in the firewall for Source Dedicated Server
-  };
+ # programs.steam = {
+ #   enable = true;
+ #   remotePlay.openFirewall =
+ #     true; # Open ports in the firewall for Steam Remote Play
+ #   dedicatedServer.openFirewall =
+ #     true; # Open ports in the firewall for Source Dedicated Server
+ # };
 
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -431,12 +430,12 @@
   networking.firewall.enable = false;
 
   
-  nix.settings = {
-    substituters = ["https://nix-gaming.cachix.org"];
-    trusted-public-keys = ["nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="];
-    #substituters = ["https://hyprland.cachix.org"];
-    #trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
-    };
+ # nix.settings = {
+ #   substituters = ["https://nix-gaming.cachix.org"];
+ #   trusted-public-keys = ["nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="];
+ #   #substituters = ["https://hyprland.cachix.org"];
+ #   #trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
+ #   };
    
 
 

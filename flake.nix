@@ -26,7 +26,10 @@
         huff-nixos-laptop = lib.nixosSystem {
           specialArgs = { inherit inputs; };
           system = "x86_64-linux";
-          modules = [ ./configuration.nix ];
+          modules = [ 
+            ./configuration.nix 
+            ./core.nix
+          ];
         };
       };
     };
