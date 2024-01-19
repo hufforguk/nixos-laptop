@@ -10,8 +10,7 @@
     inputs.home-manager.nixosModules.home-manager
     # ./scanner.nix
     inputs.nixvim.nixosModules.nixvim
-    inputs.nix-gaming.nixosModules.pipewireLowLatency
-    # ./core.nix
+  #  inputs.nix-gaming.nixosModules.pipewireLowLatency
   ];
   home-manager = {
     extraSpecialArgs = { inherit inputs; };
@@ -20,7 +19,16 @@
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
  
- nix = {
+
+  
+  fileSystems."/nfs/srv" = {
+    device = "valerian:/srv";
+    fsType = "nfs";
+    options = [ "x-systemd.idle-timeout=600" "x-systemd.automount" "noauto" ];
+  };
+ 
+
+  nix = {
     package = pkgs.nixFlakes;
     extraOptions = lib.optionalString (config.nix.package == pkgs.nixFlakes)
       "experimental-features = nix-command flakes";
@@ -157,12 +165,18 @@
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
+
+  services.flatpak.enable = true;
+
+
   #  # Enable sound.
   #  sound.enable = true;
   hardware.pulseaudio.enable = false;
 
   # Enable sound with pipewire.
   sound.enable = true;
+  sound.mediaKeys.enable = true;
+
   security.rtkit.enable = true;
 
   services.pipewire = {
@@ -172,13 +186,13 @@
     pulse.enable = true;
     jack.enable = true;
 
-    lowLatency = {
+    #lowLatency = {
       # enable this module
-      enable = true;
+     # enable = true;
       # defaults (no need to be set unless modified)
     #  quantum = 64;
     #  rate = 48000;
-    };
+    #};
   };
 
 
@@ -357,7 +371,7 @@
     # steam-tui
     kitty
     hypr
-     rofi
+    rofi
     waybar
     docker
     libnotify
@@ -391,6 +405,14 @@
     kicadAddons.kikit-library
     # python311Packages.cadquery
     # cq-editor
+    sc-im
+    neomutt
+    protonmail-bridge
+    wordgrinder
+    asciiquarium
+    toipe
+    visidata
+    dialog
   ];
 
   #nixpkgs.overlays = with pkgs; [
@@ -430,12 +452,12 @@
   networking.firewall.enable = false;
 
   
- # nix.settings = {
- #   substituters = ["https://nix-gaming.cachix.org"];
- #   trusted-public-keys = ["nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="];
+  nix.settings = {
+    substituters = ["https://nix-gaming.cachix.org"];
+    trusted-public-keys = ["nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="];
  #   #substituters = ["https://hyprland.cachix.org"];
  #   #trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
- #   };
+    };
    
 
 
