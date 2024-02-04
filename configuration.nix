@@ -98,6 +98,21 @@
   hardware.bluetooth.enable = true;
   services.blueman.enable = true;
 
+  programs.tmux = {
+    enable = true;
+    clock24 = true;
+    terminal = "tmux-256color";
+    plugins = with pkgs;
+    [
+      tmuxPlugins.better-mouse-mode
+      tmuxPlugins.catppuccin
+      tmuxPlugins.sidebar
+      tmuxPlugins.online-status
+      tmuxPlugins.weather
+    ];
+
+  };
+
   # NVIDIA requires nonfree
   nixpkgs.config = {
     allowUnfree = true;
@@ -413,6 +428,14 @@
     toipe
     visidata
     dialog
+    alpine
+    bsdgames
+    neo-cowsay
+    lolcat
+    figlet
+    nethack
+    scrcpy
+    imagemagickBig
   ];
 
   #nixpkgs.overlays = with pkgs; [
