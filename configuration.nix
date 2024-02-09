@@ -436,6 +436,7 @@
     nethack
     scrcpy
     imagemagickBig
+    fontforge-gtk
   ];
 
   #nixpkgs.overlays = with pkgs; [
