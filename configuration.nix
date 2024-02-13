@@ -437,6 +437,8 @@
     scrcpy
     imagemagickBig
     fontforge-gtk
+    meshlab
+    onlyoffice-bin_7_5
   ];
 
   #nixpkgs.overlays = with pkgs; [
