@@ -441,6 +441,18 @@
     onlyoffice-bin_7_5
   ];
 
+  fonts.fontDir.enable = true;
+  fonts.packages = with pkgs; [
+    noto-fonts
+    noto-fonts-cjk
+    noto-fonts-emoji
+    liberation_ttf
+    fira-code
+    fira-code-symbols
+    mplus-outline-fonts.githubRelease
+    dina-font
+    proggyfonts
+  ];
   #nixpkgs.overlays = with pkgs; [
   #    (self: super: {
   #      mpv-unwrapped = super.mpv-unwrapped.override {
