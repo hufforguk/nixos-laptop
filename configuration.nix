@@ -54,6 +54,14 @@
   services.udisks2.enable = true;
 
 
+  programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = with pkgs; [
+    # Add any missing dynamic libraries for unpackaged
+    # programs here, NOT in environment.systemPackages
+
+  ];
+
+
   networking.hostName = "huff-nixos-laptop"; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -171,7 +179,7 @@
   services.avahi.nssmdns4 = true;
 
   # Configure keymap in X11
-  services.xserver.layout = "gb";
+  services.xserver.xkb.layout = "gb";
   # services.xserver.xkbOptions = {
   #   "eurosign:e";
   #   "caps:escape" # map caps to escape.
