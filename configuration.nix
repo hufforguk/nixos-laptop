@@ -438,7 +438,7 @@
     imagemagickBig
     fontforge-gtk
     meshlab
-    onlyoffice-bin_7_5
+    onlyoffice-bin_latest
   ];
 
   fonts.fontDir.enable = true;
