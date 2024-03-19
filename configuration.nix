@@ -299,8 +299,11 @@
      # "--exit-node-allow-lan-access" 
      # "--accept-route"
     ];
+  };
 
-    
+  services.ollama = {
+    enable = true;
+    acceleration = "cuda";
   };
 
   virtualisation.docker.enable = true;
@@ -400,7 +403,7 @@
     libnotify
     swww
     electrum
-    latte-dock
+    # latte-dock
     yt-dlp
     hugo
     hugin
@@ -447,6 +450,7 @@
     fontforge-gtk
     meshlab
     onlyoffice-bin_latest
+    wireplumber
   ];
 
   fonts.fontDir.enable = true;
