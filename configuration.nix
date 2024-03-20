@@ -61,6 +61,7 @@
 
   ];
 
+  powerManagement.enable = true;
 
   networking.hostName = "huff-nixos-laptop"; # Define your hostname.
   # Pick only one of the below networking options.
@@ -99,7 +100,7 @@
     enable = true;
     displayManager.sddm.enable = true;
     displayManager.defaultSession = "plasmawayland";
-    desktopManager.plasma5.enable = true;
+    desktopManager.plasma6.enable = true;
   };
 
   programs.kdeconnect.enable = true;
@@ -398,7 +399,7 @@
     kitty
     hypr
     rofi
-    waybar
+    #waybar
     docker
     libnotify
     swww
