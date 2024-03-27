@@ -292,10 +292,10 @@
     ];
   };
 
-  services.ollama = {
-    enable = true;
-    acceleration = "cuda";
-  };
+#  services.ollama = {
+#    enable = true;
+#    acceleration = "cuda";
+#  };
 
   virtualisation.docker.enable = true;
 #  services.flatpak.enable = true;
