@@ -95,13 +95,13 @@
   	};
 
 
-  # Enable the X11 windowing system & the Plasma 5 Desktop Environment
+  # Enable the X11 windowing system & the Plasma 6 Desktop Environment
   services.xserver = {
     enable = true;
     displayManager.sddm.enable = true;
     displayManager.defaultSession = "plasma";
-    desktopManager.plasma6.enable = true;
   };
+  services.desktopManager.plasma6.enable = true;
 
   programs.kdeconnect.enable = true;
   hardware.bluetooth.enable = true;
@@ -128,16 +128,6 @@
     permittedInsecurePackages = [ "electron-24.8.6" ];
   };
 
-    programs.hyprland = {
-      enable = true;
-      xwayland.enable = true;
-    };
-  environment.sessionVariables = {
-    # If your cursor becomes invisible
-    WLR_NO_HARDWARE_CURSORS = "1";
-    # Hint electron apps to use wayland
-    NIXOS_OZONE_WL = "1";
-  };
 
   # environment.sessionVariables.NIXOS_OZONE_WL = "1";
   services.xserver.videoDrivers = [ "nvidia" ];
@@ -385,7 +375,7 @@
     electrum
     # heroic
     # gogdl
-    nvtop-nvidia
+    nvtopPackages.nvidia
     rpi-imager
     # kdenlive
     # kodi
