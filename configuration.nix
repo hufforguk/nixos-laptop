@@ -192,6 +192,7 @@
   sound.mediaKeys.enable = true;
 
   security.rtkit.enable = true;
+  security.pam.services.sddm.enableKwallet = true;
 
   services.pipewire = {
     enable = true;
@@ -216,9 +217,9 @@
   # Virtualisation services
   virtualisation.libvirtd.enable = true;
   virtualisation.spiceUSBRedirection.enable = true;
-  # virtualisation.virtualbox.host.enable = true;
-  # virtualisation.virtualbox.host.enableExtensionPack = true;
-  # users.extraGroups.vboxusers.members = [ "huff" ];
+  virtualisation.virtualbox.host.enable = true;
+  virtualisation.virtualbox.host.enableExtensionPack = true;
+  users.extraGroups.vboxusers.members = [ "huff" ];
 
   programs.dconf.enable = true;
 
