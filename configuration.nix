@@ -71,6 +71,9 @@
   networking.hostId = "5c38be42";
 
   hardware.sane.enable = true;
+  hardware.sane.brscan5.enable = true;
+
+
 
   # Set your time zone.
   time.timeZone = "Europe/London";
@@ -443,7 +446,9 @@
     meshlab
     onlyoffice-bin_latest
     wireplumber
+    brlaser
   ];
+
 
   fonts.fontDir.enable = true;
   fonts.packages = with pkgs; [
