@@ -10,12 +10,14 @@
     inputs.home-manager.nixosModules.home-manager
     # ./scanner.nix
     inputs.nixvim.nixosModules.nixvim
-  #  inputs.nix-gaming.nixosModules.pipewireLowLatency
+    inputs.nix-gaming.nixosModules.pipewireLowLatency
   ];
   home-manager = {
     extraSpecialArgs = { inherit inputs; };
     users = { huff = import ./home-manager/home.nix; };
   };
+  
+  programs.gamemode.enable = true;
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
  
@@ -72,8 +74,8 @@
 
   hardware.sane.enable = true;
   hardware.sane.brscan5.enable = true;
-
-
+  hardware.sane.extraBackends = [ pkgs.sane-airscan ];
+  
 
   # Set your time zone.
   time.timeZone = "Europe/London";
@@ -99,11 +101,12 @@
 
 
   # Enable the X11 windowing system & the Plasma 6 Desktop Environment
-  services.xserver = {
-    enable = true;
+  services = { #xserver = {
+   # enable = true;
     displayManager.sddm.enable = true;
     displayManager.defaultSession = "plasma";
   };
+  services.displayManager.sddm.wayland.enable = true;
   services.desktopManager.plasma6.enable = true;
 
   programs.kdeconnect.enable = true;
@@ -128,7 +131,12 @@
   # NVIDIA requires nonfree
   nixpkgs.config = {
     allowUnfree = true;
-    permittedInsecurePackages = [ "electron-24.8.6" ];
+    permittedInsecurePackages = [ 
+      "electron-24.8.6" 
+      "olm-3.2.16"
+      "adobe-reader-9.5.5"
+    ];
+    chromium.enableWideVine = true;
   };
 
 
@@ -143,10 +151,11 @@
         intelBusId = "PCI:0:2:0";
         nvidiaBusId = "PCI:1:0:0";
       };
+      open = true; 
       modesetting.enable = true;
     };
 
-    opengl = {
+    graphics = {
       enable = true;
       extraPackages = with pkgs; [
         intel-media-driver # LIBVA_DRIVER_NAME=iHD
@@ -154,8 +163,7 @@
         vaapiVdpau
         libvdpau-va-gl
       ];
-      driSupport = true;
-      driSupport32Bit = true;
+      enable32Bit = true;
     };
   };
   #  environment.systemPackages = [
@@ -191,8 +199,8 @@
   hardware.pulseaudio.enable = false;
 
   # Enable sound with pipewire.
-  sound.enable = true;
-  sound.mediaKeys.enable = true;
+  # sound.enable = true;
+  # sound.mediaKeys.enable = true;
 
   security.rtkit.enable = true;
   security.pam.services.sddm.enableKwallet = true;
@@ -204,25 +212,25 @@
     pulse.enable = true;
     jack.enable = true;
 
-    #lowLatency = {
+    lowLatency = {
       # enable this module
-     # enable = true;
+      enable = true;
       # defaults (no need to be set unless modified)
-    #  quantum = 64;
-    #  rate = 48000;
-    #};
+      quantum = 64;
+      rate = 48000;
+    };
   };
 
 
   # Enable touchpad support (enabled default in most desktopManager).
-  services.xserver.libinput.enable = true;
+  services.libinput.enable = true;
 
   # Virtualisation services
   virtualisation.libvirtd.enable = true;
   virtualisation.spiceUSBRedirection.enable = true;
-  virtualisation.virtualbox.host.enable = true;
-  virtualisation.virtualbox.host.enableExtensionPack = true;
-  users.extraGroups.vboxusers.members = [ "huff" ];
+ # virtualisation.virtualbox.host.enable = true;
+ # virtualisation.virtualbox.host.enableExtensionPack = true;
+ #  users.extraGroups.vboxusers.members = [ "huff" ];
 
   programs.dconf.enable = true;
 
@@ -299,6 +307,7 @@
 #  services.ollama = {
 #    enable = true;
 #    acceleration = "cuda";
+    
 #  };
 
   virtualisation.docker.enable = true;
@@ -309,7 +318,7 @@
   environment.systemPackages = with pkgs; [
     vim_configurable
     home-manager
-    nixfmt
+    nixfmt-classic # this may change to new version nixfmt - currently as temp nixfmt-rfc-style
     htop
     tmux
     wget
@@ -322,15 +331,14 @@
     dig
     nmap
     whois
-    # monero-gui
+    monero-gui
     # neovim
     firefox
     evolution
-    freecad
     mpv
     vlc
-    libdvdread
-    libdvdcss
+    # libdvdread
+    # libdvdcss
     ffmpeg
     # mpvc # - could not get to work?? 
     deja-dup
@@ -349,9 +357,9 @@
     #cura
     prusa-slicer
     remmina
-    scribus
+    # scribus
     syncthing
-    stellarium
+    # stellarium
     ungoogled-chromium
     thunderbird
     distrobox
@@ -376,9 +384,9 @@
     libreoffice-fresh
     darktable
     # monero-gui
-    electrum
-    # heroic
-    # gogdl
+    heroic
+    gogdl
+    legendary-gl
     nvtopPackages.nvidia
     rpi-imager
     # kdenlive
@@ -417,22 +425,22 @@
     wireguard-tools
     quickemu
     jellyfin-mpv-shim
-    # inputs.nix-gaming.packages.${pkgs.system}.rocket-league
+    inputs.nix-gaming.packages.${pkgs.system}.rocket-league
     cargo
     rustc
     lshw
-    kicad
-    kicadAddons.kikit
-    kicadAddons.kikit-library
+    # kicad
+    # kicadAddons.kikit
+    # kicadAddons.kikit-library
     # python311Packages.cadquery
     # cq-editor
-    sc-im
-    neomutt
+    sc-im # terminal based spreadsheet
+    neomutt #term based email client
     protonmail-bridge
     wordgrinder
     asciiquarium
     toipe
-    visidata
+    # visidata
     dialog
     alpine
     bsdgames
@@ -447,7 +455,9 @@
     onlyoffice-bin_latest
     wireplumber
     brlaser
+    adobe-reader
   ];
+
 
 
   fonts.fontDir.enable = true;
@@ -470,13 +480,14 @@
   #    })
   #  ];
 
- # programs.steam = {
- #   enable = true;
- #   remotePlay.openFirewall =
- #     true; # Open ports in the firewall for Steam Remote Play
- #   dedicatedServer.openFirewall =
- #     true; # Open ports in the firewall for Source Dedicated Server
- # };
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall =
+      true; # Open ports in the firewall for Steam Remote Play
+    dedicatedServer.openFirewall =
+      true; # Open ports in the firewall for Source Dedicated Server
+     localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
+  };
 
 
   # Some programs need SUID wrappers, can be configured further or are
