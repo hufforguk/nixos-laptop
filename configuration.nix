@@ -17,7 +17,7 @@
     users = { huff = import ./home-manager/home.nix; };
   };
   
-  programs.gamemode.enable = true;
+ # programs.gamemode.enable = true;
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
  
@@ -146,8 +146,8 @@
   hardware = {
     nvidia = {
       prime = {
-        offload.enable = true; # enable to use intel gpu (hybrid mode)
-        # sync.enable = true; # enable to use nvidia gpu (discrete mode)
+        #offload.enable = true; # enable to use intel gpu (hybrid mode)
+         sync.enable = true; # enable to use nvidia gpu (discrete mode)
         intelBusId = "PCI:0:2:0";
         nvidiaBusId = "PCI:1:0:0";
       };
@@ -273,11 +273,13 @@
       openscad.enable = true;
       neo-tree.enable = true;
 
+      mini.modules.enable = true; 
+      
       lsp = {
         enable = true;
         servers = {
           #javascript/typescript
-          tsserver.enable = true;
+          ts-ls.enable = true;
 
           # lua
           lua-ls.enable = true;
