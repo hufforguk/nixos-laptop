@@ -28,7 +28,7 @@
     fsType = "nfs";
     options = [ "x-systemd.idle-timeout=600" "x-systemd.automount" "noauto" ];
   };
- 
+
 
   nix = {
     package = pkgs.nixFlakes;
@@ -111,7 +111,7 @@
 
   programs.kdeconnect.enable = true;
   hardware.bluetooth.enable = true;
-  services.blueman.enable = true;
+  # services.blueman.enable = true;
 
   programs.tmux = {
     enable = true;
@@ -356,9 +356,9 @@
     # steam
     # wine
     # lutris
-    #cura
-    prusa-slicer
-    remmina
+    # cura
+    # prusa-slicer
+    # remmina
     # scribus
     syncthing
     # stellarium
@@ -372,23 +372,22 @@
     #retroarchFull
     openscad
     audacity
-    ardour
-    blender
+    # ardour
+    # blender
     dia
     drawio
-    librecad
+    # librecad
     # sweethome3d.application
-    #sweethome3d.textures-editor
+    # sweethome3d.textures-editor
     # sweethome3d.furniture-editor
     # qlcplus
     # xbill
     # atanks
     libreoffice-fresh
     darktable
-    # monero-gui
-    heroic
-    gogdl
-    legendary-gl
+    #  heroic
+    # gogdl
+    # legendary-gl
     nvtopPackages.nvidia
     rpi-imager
     # kdenlive
@@ -400,29 +399,29 @@
     appimage-run
     # steamcmd
     # steam-tui
-    kitty
-    hypr
-    rofi
-    #waybar
-    docker
+    # kitty
+    # hypr
+    # rofi
+    # waybar
+    # docker
     libnotify
-    swww
+    # swww
     electrum
     # latte-dock
     yt-dlp
-    hugo
+    # hugo
     hugin
     panotools
     scantailor-advanced
-    virtiofsd
+    # virtiofsd
     # opensc
     # patchelf
     # metasploit
     nextcloud-client
     pavucontrol
-    helvum
+    # helvum
     libsForQt5.kate
-    raysession
+    # raysession
     # mame
     wireguard-tools
     quickemu
@@ -431,6 +430,7 @@
     cargo
     rustc
     lshw
+    libation # Audible book downloader
     # kicad
     # kicadAddons.kikit
     # kicadAddons.kikit-library
@@ -457,6 +457,7 @@
     onlyoffice-bin_latest
     wireplumber
     brlaser
+    freecad-wayland
     adobe-reader
   ];
 
