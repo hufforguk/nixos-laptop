@@ -49,6 +49,14 @@
   boot.initrd.systemd.enable = true;
   boot.plymouth.enable = true;
 
+  #additional droidcam items
+  boot.extraModulePackages = with config.boot.kernelPackages; [
+    v4l2loopback
+  ];
+  boot.extraModprobeConfig = ''options v4l2loopback devices=1 video_nr=1 card_label="OBS Cam" exclusive_caps=1'';
+  security.polkit.enable = true;
+  #########
+
   services.zfs.autoScrub.enable = true;
 
   services.gvfs.enable = true;
@@ -252,6 +260,12 @@
       [
         #firefox
         #thunderbird
+
+        (wrapOBS {
+        plugins = with obs-studio-plugins; [
+          droidcam-obs
+        ];
+      })
       ];
   };
  
