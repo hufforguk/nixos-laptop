@@ -368,7 +368,7 @@
     # bitwarden
     # bottles
     # steam
-    # wine
+    wine-wow
     # lutris
     # cura
     # prusa-slicer
@@ -379,11 +379,11 @@
     ungoogled-chromium
     thunderbird
     distrobox
-    # winetricks
+    winetricks
     # protontricks
     transmission-remote-gtk
     # steam-rom-manager
-    #retroarchFull
+    # retroarchFull
     openscad
     audacity
     # ardour
@@ -427,7 +427,7 @@
     hugin
     panotools
     scantailor-advanced
-    # virtiofsd
+    virtiofsd
     # opensc
     # patchelf
     # metasploit
