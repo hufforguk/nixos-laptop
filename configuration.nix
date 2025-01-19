@@ -62,7 +62,13 @@
   services.gvfs.enable = true;
   services.devmon.enable = true;
   services.udisks2.enable = true;
+  
 
+  services.samba-wsdd = {
+      # This enables autodiscovery on windows since SMB1 (and thus netbios) support was discontinued
+    enable = true;
+    openFirewall = true;
+  };
 
   programs.nix-ld.enable = true;
   programs.nix-ld.libraries = with pkgs; [
@@ -83,7 +89,7 @@
   hardware.sane.enable = true;
   hardware.sane.brscan5.enable = true;
   hardware.sane.extraBackends = [ pkgs.sane-airscan ];
-  
+  hardware.sane.openFirewall = true;  
 
   # Set your time zone.
   time.timeZone = "Europe/London";
@@ -117,7 +123,9 @@
   services.displayManager.sddm.wayland.enable = true;
   services.desktopManager.plasma6.enable = true;
 
+ 
   programs.kdeconnect.enable = true;
+  programs.partition-manager.enable = true;
   hardware.bluetooth.enable = true;
   # services.blueman.enable = true;
 
@@ -235,6 +243,7 @@
 
   # Virtualisation services
   virtualisation.libvirtd.enable = true;
+  virtualisation.libvirtd.qemu.vhostUserPackages = with pkgs; [ virtiofsd ];
   virtualisation.spiceUSBRedirection.enable = true;
  # virtualisation.virtualbox.host.enable = true;
  # virtualisation.virtualbox.host.enableExtensionPack = true;
@@ -360,7 +369,6 @@
     deja-dup
     duplicity
     gimp
-    inkscape
     tuxpaint
     gcompris
     krita
@@ -368,7 +376,7 @@
     # bitwarden
     # bottles
     # steam
-    wine-wow
+   # wine-wow
     # lutris
     # cura
     # prusa-slicer
@@ -473,6 +481,13 @@
     brlaser
     freecad-wayland
     adobe-reader
+    kdePackages.skanpage
+    kdePackages.skanlite
+    epsonscan2
+    exiftool
+    simple-scan
+    bridge-utils
+    adwaita-icon-theme
   ];
 
 
