@@ -195,7 +195,8 @@
 
   services.avahi.enable = true;
   services.avahi.nssmdns4 = true;
-
+  services.avahi.openFirewall = true;
+  
   # Configure keymap in X11
   services.xserver.xkb.layout = "gb";
   # services.xserver.xkbOptions = {
@@ -206,13 +207,20 @@
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
+  # Add Brother printer drivers
+  services.printing.drivers = [
+    pkgs.brlaser
+    pkgs.brgenml1lpr
+    pkgs.brgenml1cupswrapper
+    pkgs.cups-dymo
+  ];
 
   services.flatpak.enable = true;
 
 
   #  # Enable sound.
   #  sound.enable = true;
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
 
   # Enable sound with pipewire.
   # sound.enable = true;
@@ -372,6 +380,7 @@
     tuxpaint
     gcompris
     krita
+    inkscape-with-extensions
     alacritty
     # bitwarden
     # bottles
@@ -381,7 +390,7 @@
     # cura
     # prusa-slicer
     # remmina
-    # scribus
+    #  scribus
     syncthing
     # stellarium
     ungoogled-chromium
@@ -395,7 +404,7 @@
     openscad
     audacity
     # ardour
-    # blender
+    blender
     dia
     drawio
     # librecad
@@ -488,6 +497,7 @@
     simple-scan
     bridge-utils
     adwaita-icon-theme
+    font-manager
   ];
 
 
@@ -503,7 +513,17 @@
     mplus-outline-fonts.githubRelease
     dina-font
     proggyfonts
+   #nerdfonts
+   inter
+   font-awesome
+   lato
+   open-sans
+   roboto
+   ubuntu_font_family 
   ];
+  fonts.fontconfig.useEmbeddedBitmaps = true;
+  fonts.enableDefaultPackages = true;
+  
   #nixpkgs.overlays = with pkgs; [
   #    (self: super: {
   #      mpv-unwrapped = super.mpv-unwrapped.override {
