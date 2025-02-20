@@ -62,7 +62,7 @@
   services.gvfs.enable = true;
   services.devmon.enable = true;
   services.udisks2.enable = true;
-  
+  services.kmscon.enable = true; 
 
   services.samba-wsdd = {
       # This enables autodiscovery on windows since SMB1 (and thus netbios) support was discontinued
