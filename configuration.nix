@@ -22,6 +22,7 @@
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
  
 
+
   
   fileSystems."/nfs/srv" = {
     device = "valerian:/srv";
@@ -62,7 +63,7 @@
   services.gvfs.enable = true;
   services.devmon.enable = true;
   services.udisks2.enable = true;
-  services.kmscon.enable = true; 
+  # services.kmscon.enable = true; 
 
   services.samba-wsdd = {
       # This enables autodiscovery on windows since SMB1 (and thus netbios) support was discontinued
@@ -87,7 +88,7 @@
   networking.hostId = "5c38be42";
 
   hardware.sane.enable = true;
-  hardware.sane.brscan5.enable = true;
+ # hardware.sane.brscan5.enable = true;
   hardware.sane.extraBackends = [ pkgs.sane-airscan ];
   hardware.sane.openFirewall = true;  
 
@@ -151,6 +152,7 @@
       "electron-24.8.6" 
       "olm-3.2.16"
       "adobe-reader-9.5.5"
+#      "googleearth-pro-7.3.6.10201"
     ];
     chromium.enableWideVine = true;
   };
@@ -273,17 +275,17 @@
         "lp"
         "scanner"
     ]; # Enable ‘sudo’ for the user.
-    packages = with pkgs;
-      [
+   # packages = with pkgs;
+   #   [
         #firefox
         #thunderbird
 
-        (wrapOBS {
-        plugins = with obs-studio-plugins; [
-          droidcam-obs
-        ];
-      })
-      ];
+   #     (wrapOBS {
+       # plugins = with obs-studio-plugins; [
+       #   droidcam-obs
+    #    ];
+     # })
+     # ];
   };
  
   programs.nixvim.enable = true;
@@ -306,23 +308,23 @@
 
       mini.modules.enable = true; 
       
-      lsp = {
-        enable = true;
-        servers = {
-          #javascript/typescript
-          ts-ls.enable = true;
-
-          # lua
-          lua-ls.enable = true;
-
-          #rust
-          rust-analyzer = {
-            enable = true;
-            installCargo = true;
-            installRustc = true;
-          };
-        };
-      };
+#      lsp = {
+#        enable = true;
+#        servers = {
+#          #javascript/typescript
+#          ts-ls.enable = true;
+#
+#          # lua
+#          lua-ls.enable = true;
+#
+#          #rust
+#          rust-analyzer = {
+#            enable = true;
+#            installCargo = true;
+#            installRustc = true;
+#          };
+#        };
+#      };
     };
 
     
@@ -376,7 +378,7 @@
     # mpvc # - could not get to work?? 
     deja-dup
     duplicity
-    gimp
+   # gimp    # - still held at 2.10 - flatpak at 3.x
     tuxpaint
     gcompris
     krita
@@ -457,7 +459,7 @@
     wireguard-tools
     quickemu
     jellyfin-mpv-shim
-    inputs.nix-gaming.packages.${pkgs.system}.rocket-league
+    #inputs.nix-gaming.packages.${pkgs.system}.rocket-league
     cargo
     rustc
     lshw
@@ -498,6 +500,8 @@
     bridge-utils
     adwaita-icon-theme
     font-manager
+    #teams-for-linux
+    #googleearth-pro
   ];
 
 
@@ -532,7 +536,7 @@
   #    })
   #  ];
 
-  programs.steam = {
+    programs.steam = {
     enable = true;
     remotePlay.openFirewall =
       true; # Open ports in the firewall for Steam Remote Play
