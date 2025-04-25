@@ -129,6 +129,8 @@
   programs.partition-manager.enable = true;
   hardware.bluetooth.enable = true;
   # services.blueman.enable = true;
+  
+  services.fwupd.enable = true;
 
   programs.tmux = {
     enable = true;
@@ -164,8 +166,8 @@
   hardware = {
     nvidia = {
       prime = {
-        #offload.enable = true; # enable to use intel gpu (hybrid mode)
-         sync.enable = true; # enable to use nvidia gpu (discrete mode)
+       # offload.enable = true; # enable to use intel gpu (hybrid mode)
+        sync.enable = true; # enable to use nvidia gpu (discrete mode)
         intelBusId = "PCI:0:2:0";
         nvidiaBusId = "PCI:1:0:0";
       };
@@ -180,6 +182,7 @@
         vaapiIntel # LIBVA_DRIVER_NAME=i965 (older but works better for FF/Chromium)
         vaapiVdpau
         libvdpau-va-gl
+        nvidia-vaapi-driver
       ];
       enable32Bit = true;
     };
@@ -288,8 +291,8 @@
      # ];
   };
  
-  programs.nixvim.enable = true;
   programs.nixvim = {
+    enable = true;
     extraPlugins = with pkgs.vimPlugins; [
       vim-nix
     #  neotree
@@ -332,11 +335,11 @@
 
   services.tailscale = {
     enable = true;
-    extraUpFlags = [
-      "--exit-node=" # 100.93.77.129"
+  #  extraUpFlags = [
+   #   "--exit-node=" # 100.93.77.129"
      # "--exit-node-allow-lan-access" 
      # "--accept-route"
-    ];
+   # ];
   };
 
 #  services.ollama = {
@@ -393,20 +396,20 @@
     # prusa-slicer
     # remmina
     #  scribus
-    syncthing
+    # syncthing
     # stellarium
     ungoogled-chromium
     thunderbird
     distrobox
-    winetricks
+   # winetricks
     # protontricks
     transmission-remote-gtk
     # steam-rom-manager
     # retroarchFull
-    openscad
+    # openscad
     audacity
     # ardour
-    blender
+    # blender
     dia
     drawio
     # librecad
@@ -437,7 +440,7 @@
     # rofi
     # waybar
     # docker
-    libnotify
+    # libnotify
     # swww
     electrum
     # latte-dock
@@ -456,8 +459,8 @@
     libsForQt5.kate
     # raysession
     # mame
-    wireguard-tools
-    quickemu
+   # wireguard-tools
+    # quickemu
     jellyfin-mpv-shim
     #inputs.nix-gaming.packages.${pkgs.system}.rocket-league
     cargo
@@ -502,6 +505,9 @@
     font-manager
     #teams-for-linux
     #googleearth-pro
+    lm_sensors
+    inxi
+    pciutils
   ];
 
 
@@ -536,14 +542,14 @@
   #    })
   #  ];
 
-    programs.steam = {
-    enable = true;
-    remotePlay.openFirewall =
-      true; # Open ports in the firewall for Steam Remote Play
-    dedicatedServer.openFirewall =
-      true; # Open ports in the firewall for Source Dedicated Server
-     localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
-  };
+#    programs.steam = {
+#    enable = true;
+#    remotePlay.openFirewall =
+#      true; # Open ports in the firewall for Steam Remote Play
+#    dedicatedServer.openFirewall =
+#      true; # Open ports in the firewall for Source Dedicated Server
+#     localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
+#  };
 
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -566,9 +572,9 @@
   networking.firewall.enable = false;
 
   
-  nix.settings = {
-    substituters = ["https://nix-gaming.cachix.org"];
-    trusted-public-keys = ["nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="];
+#  nix.settings = {
+ #   substituters = ["https://nix-gaming.cachix.org"];
+  #  trusted-public-keys = ["nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="];
  #   #substituters = ["https://hyprland.cachix.org"];
  #   #trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
     };
