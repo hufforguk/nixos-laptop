@@ -46,7 +46,7 @@
   boot.zfs.requestEncryptionCredentials = true;
   # boot.supportedFilesystems = [ "ntfs" ];
   # boot.kernelPackages = pkgs.linuxPackages_zen;
-
+  boot.loader.grub.memtest86.enable = true;
   boot.initrd.systemd.enable = true;
   boot.plymouth.enable = true;
 
@@ -116,16 +116,16 @@
 
 
   # Enable the X11 windowing system & the Plasma 6 Desktop Environment
-  services = { #xserver = {
-   # enable = true;
-    displayManager.sddm.enable = true;
-    displayManager.defaultSession = "plasma";
-  };
-  services.displayManager.sddm.wayland.enable = true;
-  services.desktopManager.plasma6.enable = true;
-
- 
-  programs.kdeconnect.enable = true;
+#  services = { #xserver = {
+#   # enable = true;
+#    displayManager.sddm.enable = true;
+#    displayManager.defaultSession = "plasma";
+#  };
+#  services.displayManager.sddm.wayland.enable = true;
+#  services.desktopManager.plasma6.enable = true;
+#
+# 
+#  programs.kdeconnect.enable = true;
   programs.partition-manager.enable = true;
   hardware.bluetooth.enable = true;
   # services.blueman.enable = true;
@@ -231,8 +231,17 @@
   # sound.enable = true;
   # sound.mediaKeys.enable = true;
 
+
+  ###############COSMIC DESKTOP TEST##########
+  # Enable the COSMIC login manager
+  services.displayManager.cosmic-greeter.enable = true;
+
+  # Enable the COSMIC desktop environment
+  services.desktopManager.cosmic.enable = true;
+
+###############################################
   security.rtkit.enable = true;
-  security.pam.services.sddm.enableKwallet = true;
+ # security.pam.services.sddm.enableKwallet = true;
 
   services.pipewire = {
     enable = true;
@@ -308,8 +317,9 @@
       fugitive.enable = true;
       openscad.enable = true;
       neo-tree.enable = true;
+    #  mini.enable = true;
 
-      mini.modules.enable = true; 
+    #  mini.modules.enable = true; 
       
 #      lsp = {
 #        enable = true;
@@ -577,7 +587,7 @@
   #  trusted-public-keys = ["nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="];
  #   #substituters = ["https://hyprland.cachix.org"];
  #   #trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
-    };
+  #  };
    
 
 
