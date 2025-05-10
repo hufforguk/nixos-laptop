@@ -116,20 +116,15 @@
 
 
   # Enable the X11 windowing system & the Plasma 6 Desktop Environment
-#  services = { #xserver = {
-#   # enable = true;
-#    displayManager.sddm.enable = true;
-#    displayManager.defaultSession = "plasma";
-#  };
-#  services.displayManager.sddm.wayland.enable = true;
-#  services.desktopManager.plasma6.enable = true;
-#
-# 
-#  programs.kdeconnect.enable = true;
+  services.displayManager.sddm.enable = true;
+  services.displayManager.sddm.wayland.enable = true;
+  services.desktopManager.plasma6.enable = true;
+
+ 
+  programs.kdeconnect.enable = true;
   programs.partition-manager.enable = true;
   hardware.bluetooth.enable = true;
   # services.blueman.enable = true;
-  
   services.fwupd.enable = true;
 
   programs.tmux = {
@@ -166,7 +161,7 @@
   hardware = {
     nvidia = {
       prime = {
-       # offload.enable = true; # enable to use intel gpu (hybrid mode)
+       # offload.enable = false; # enable to use intel gpu (hybrid mode)
         sync.enable = true; # enable to use nvidia gpu (discrete mode)
         intelBusId = "PCI:0:2:0";
         nvidiaBusId = "PCI:1:0:0";
@@ -232,16 +227,8 @@
   # sound.mediaKeys.enable = true;
 
 
-  ###############COSMIC DESKTOP TEST##########
-  # Enable the COSMIC login manager
-  services.displayManager.cosmic-greeter.enable = true;
-
-  # Enable the COSMIC desktop environment
-  services.desktopManager.cosmic.enable = true;
-
-###############################################
   security.rtkit.enable = true;
- # security.pam.services.sddm.enableKwallet = true;
+  security.pam.services.sddm.enableKwallet = true;
 
   services.pipewire = {
     enable = true;
@@ -270,6 +257,7 @@
  # virtualisation.virtualbox.host.enable = true;
  # virtualisation.virtualbox.host.enableExtensionPack = true;
  #  users.extraGroups.vboxusers.members = [ "huff" ];
+ virtualisation.waydroid.enable = true;
 
   programs.dconf.enable = true;
 
@@ -316,7 +304,7 @@
     plugins = {
       fugitive.enable = true;
       openscad.enable = true;
-      neo-tree.enable = true;
+    #  neo-tree.enable = true;
     #  mini.enable = true;
 
     #  mini.modules.enable = true; 
@@ -518,6 +506,7 @@
     lm_sensors
     inxi
     pciutils
+    glxgears
   ];
 
 
