@@ -54,11 +54,29 @@
   boot.extraModulePackages = with config.boot.kernelPackages; [
     v4l2loopback
   ];
-  boot.extraModprobeConfig = ''options v4l2loopback devices=1 video_nr=1 card_label="OBS Cam" exclusive_caps=1'';
+  boot.extraModprobeConfig = ''options v4l2loopback devices=1 video_nr=1 card_label="OBS Cam" exclusive_caps=1
+   blacklist nouveau
+   options nouveau modeset=0
+  '';
   security.polkit.enable = true;
   #########
 
   services.zfs.autoScrub.enable = true;
+
+  services.sanoid = {
+  enable = true;
+  templates.backup = {
+    hourly = 36;
+    daily = 30;
+    monthly = 3;
+    autoprune = true;
+    autosnap = true;
+   };
+
+  datasets."NIXROOT/home" = {
+    useTemplate = [ "backup" ];
+  };
+ };
 
   services.gvfs.enable = true;
   services.devmon.enable = true;
@@ -153,22 +171,43 @@
     ];
     chromium.enableWideVine = true;
   };
+ 
+
+
+
+
+#   boot.extraModprobeConfig = ''
+#    blacklist nouveau
+#    options nouveau modeset=0
+#  '';
+  
+  services.udev.extraRules = ''
+    # Remove NVIDIA USB xHCI Host Controller devices, if present
+    ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x0c0330", ATTR{power/control}="auto", ATTR{remove}="1"
+    # Remove NVIDIA USB Type-C UCSI devices, if present
+    ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x0c8000", ATTR{power/control}="auto", ATTR{remove}="1"
+    # Remove NVIDIA Audio devices, if present
+    ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x040300", ATTR{power/control}="auto", ATTR{remove}="1"
+    # Remove NVIDIA VGA/3D controller devices
+    ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x03[0-9]*", ATTR{power/control}="auto", ATTR{remove}="1"
+  '';
+  boot.blacklistedKernelModules = [ "nouveau" "nvidia" "nvidia_drm" "nvidia_modeset" ];
 
 
   # environment.sessionVariables.NIXOS_OZONE_WL = "1";
-  services.xserver.videoDrivers = [ "nvidia" ];
+#  services.xserver.videoDrivers = [ "nvidia" ];
 
   hardware = {
-    nvidia = {
-      prime = {
-       # offload.enable = false; # enable to use intel gpu (hybrid mode)
-        sync.enable = true; # enable to use nvidia gpu (discrete mode)
-        intelBusId = "PCI:0:2:0";
-        nvidiaBusId = "PCI:1:0:0";
-      };
-      open = true; 
-      modesetting.enable = true;
-    };
+#   nvidia = {
+#    prime = {
+#        offload.enable = true; # enable to use intel gpu (hybrid mode)
+#       #  sync.enable = true; # enable to use nvidia gpu (discrete mode)
+#        intelBusId = "PCI:0:2:0";
+#        nvidiaBusId = "PCI:1:0:0";
+#      };
+#      open = true; 
+#      modesetting.enable = true;
+#    };
 
     graphics = {
       enable = true;
@@ -177,9 +216,9 @@
         vaapiIntel # LIBVA_DRIVER_NAME=i965 (older but works better for FF/Chromium)
         vaapiVdpau
         libvdpau-va-gl
-        nvidia-vaapi-driver
+#        nvidia-vaapi-driver
       ];
-      enable32Bit = true;
+ #     enable32Bit = true;
     };
   };
   #  environment.systemPackages = [
@@ -274,7 +313,22 @@
         "networkmanager"
         "lp"
         "scanner"
-    ]; # Enable ‘sudo’ for the user.
+      ];
+    };# Enable ‘sudo’ for the user.
+   
+  users.users.secuser = {
+      isNormalUser = true;
+      initialPassword = "pw321";
+      extraGroups = [
+        "wheel"
+        "libvirtd"
+        "docker"
+        "tty"
+        "dialout"
+        "networkmanager"
+        "lp"
+        "scanner"
+    ]; 
    # packages = with pkgs;
    #   [
         #firefox
@@ -492,7 +546,7 @@
     wireplumber
     brlaser
     freecad-wayland
-    adobe-reader
+   #  adobe-reader
     kdePackages.skanpage
     kdePackages.skanlite
     epsonscan2
@@ -506,7 +560,8 @@
     lm_sensors
     inxi
     pciutils
-    glxgears
+    ed
+    mesa-demos
   ];
 
 
