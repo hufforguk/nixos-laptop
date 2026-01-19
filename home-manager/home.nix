@@ -58,12 +58,14 @@
 
   programs.git = {
     enable = true;
-    userName  = "Nicholas Evans";
-    userEmail = "nick@huff.org.uk";
-    aliases = {
-      ci = "commit";
-      co = "checkout";
-      s = "status";
+    settings = { 
+      user.name  = "Nicholas Evans";
+      user.email = "nick@huff.org.uk";
+      alias = {
+        ci = "commit";
+        co = "checkout";
+        s = "status";
+      };
     };
   };
 

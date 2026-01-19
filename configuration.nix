@@ -89,6 +89,8 @@
     openFirewall = true;
   };
 
+  services.i2p.enable = true;
+
   programs.nix-ld.enable = true;
   programs.nix-ld.libraries = with pkgs; [
     # Add any missing dynamic libraries for unpackaged
@@ -138,6 +140,12 @@
   services.displayManager.sddm.wayland.enable = true;
   services.desktopManager.plasma6.enable = true;
 
+    services.hardware.openrgb = { 
+    enable = true; 
+    package = pkgs.openrgb-with-all-plugins; 
+      };
+
+
  
   programs.kdeconnect.enable = true;
   programs.partition-manager.enable = true;
@@ -167,6 +175,8 @@
       "electron-24.8.6" 
       "olm-3.2.16"
       "adobe-reader-9.5.5"
+      "libsoup-2.74.3"
+      "python3.13-ecdsa-0.19.1"
 #      "googleearth-pro-7.3.6.10201"
     ];
     chromium.enableWideVine = true;
@@ -213,8 +223,8 @@
       enable = true;
       extraPackages = with pkgs; [
         intel-media-driver # LIBVA_DRIVER_NAME=iHD
-        vaapiIntel # LIBVA_DRIVER_NAME=i965 (older but works better for FF/Chromium)
-        vaapiVdpau
+        intel-vaapi-driver #LIBVA_DRIVER_NAME=i965 (older but works better for FF/Chromium)
+        libva-vdpau-driver 
         libvdpau-va-gl
 #        nvidia-vaapi-driver
       ];
@@ -242,7 +252,11 @@
   #   "eurosign:e";
   #   "caps:escape" # map caps to escape.
   # };
+  
 
+  services.xserver.desktopManager.retroarch.enable = true;
+
+  
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
@@ -346,9 +360,9 @@
     enable = true;
     extraPlugins = with pkgs.vimPlugins; [
       vim-nix
-    #  neotree
-    #  fugative
-    #  nvim-cmp
+      #nvim-tree
+     # fugitive
+      nvim-cmp
 
     ];
     enableMan = true;
@@ -358,28 +372,36 @@
     plugins = {
       fugitive.enable = true;
       openscad.enable = true;
-    #  neo-tree.enable = true;
-    #  mini.enable = true;
+      fzf-lua = {
+        enable = true;
+        autoLoad = true;
+      };
+      dashboard = {
+        enable = true;
+        autoLoad = true;
+      };
+     neo-tree.enable = true;
+      mini.enable = true;
 
-    #  mini.modules.enable = true; 
+     # mini.modules.enable = true; 
       
-#      lsp = {
-#        enable = true;
-#        servers = {
-#          #javascript/typescript
-#          ts-ls.enable = true;
-#
-#          # lua
-#          lua-ls.enable = true;
-#
-#          #rust
-#          rust-analyzer = {
-#            enable = true;
-#            installCargo = true;
-#            installRustc = true;
-#          };
-#        };
-#      };
+      lsp = {
+        enable = true;
+        servers = {
+          #javascript/typescript
+          ts_ls.enable = true;
+
+          # lua
+          lua_ls.enable = true;
+
+          #rust
+          rust_analyzer = {
+            enable = true;
+            installCargo = true;
+            installRustc = true;
+          };
+        };
+      };
     };
 
     
@@ -406,9 +428,9 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    vim_configurable
+  #  vim-full
     home-manager
-    nixfmt-classic # this may change to new version nixfmt - currently as temp nixfmt-rfc-style
+    nixfmt #-classic # this may change to new version nixfmt - currently as temp nixfmt-rfc-style
     htop
     tmux
     wget
@@ -422,7 +444,7 @@
     nmap
     whois
     monero-gui
-    # neovim
+     neovim
     firefox
     evolution
     mpv
@@ -457,7 +479,7 @@
     # protontricks
     transmission-remote-gtk
     # steam-rom-manager
-    # retroarchFull
+     retroarch-full
     # openscad
     audacity
     # ardour
@@ -476,7 +498,7 @@
     #  heroic
     # gogdl
     # legendary-gl
-    nvtopPackages.nvidia
+    # nvtopPackages.nvidia
     rpi-imager
     # kdenlive
     # kodi
@@ -508,7 +530,7 @@
     nextcloud-client
     pavucontrol
     # helvum
-    libsForQt5.kate
+    # libsForQt5.kate
     # raysession
     # mame
    # wireguard-tools
@@ -525,7 +547,7 @@
     # python311Packages.cadquery
     # cq-editor
     sc-im # terminal based spreadsheet
-    neomutt #term based email client
+    neomutt #term based econfigurablemail client
     protonmail-bridge
     wordgrinder
     asciiquarium
@@ -541,15 +563,15 @@
     scrcpy
     imagemagickBig
     fontforge-gtk
-    meshlab
-    onlyoffice-bin_latest
+    # meshlab
+    onlyoffice-desktopeditors
     wireplumber
     brlaser
     freecad-wayland
    #  adobe-reader
     kdePackages.skanpage
     kdePackages.skanlite
-    epsonscan2
+   # epsonscan2
     exiftool
     simple-scan
     bridge-utils
@@ -570,7 +592,7 @@
   fonts.packages = with pkgs; [
     noto-fonts
     noto-fonts-cjk-sans
-    noto-fonts-emoji
+    noto-fonts-color-emoji
     liberation_ttf
     fira-code
     fira-code-symbols
@@ -583,7 +605,7 @@
    lato
    open-sans
    roboto
-   ubuntu_font_family 
+   ubuntu-classic
   ];
   fonts.fontconfig.useEmbeddedBitmaps = true;
   fonts.enableDefaultPackages = true;

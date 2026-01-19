@@ -14,7 +14,8 @@
  
 
     nix-gaming.url = "github:fufexan/nix-gaming";
-
+    
+    m4b-tools.url = "github:sandreas/m4b-tool";
 
     nixvim = {
       url = "github:nix-community/nixvim";
