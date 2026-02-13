@@ -17,7 +17,7 @@
     users = { huff = import ./home-manager/home.nix; };
   };
   
- # programs.gamemode.enable = true;
+  programs.gamemode.enable = true;
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
  
@@ -217,6 +217,7 @@
       };
       open = true; 
       modesetting.enable = true;
+      powerManagement.enable = true;
     };
 
     graphics = {
@@ -462,10 +463,10 @@
     inkscape-with-extensions
     alacritty
     # bitwarden
-    # bottles
+     bottles
     # steam
-   # wine-wow
-    # lutris
+    wine-wow
+     lutris
     # cura
     # prusa-slicer
     # remmina
@@ -475,10 +476,10 @@
     ungoogled-chromium
     thunderbird
     distrobox
-   # winetricks
-    # protontricks
+    winetricks
+     protontricks
     transmission-remote-gtk
-    # steam-rom-manager
+     steam-rom-manager
      retroarch-full
     # openscad
     audacity
@@ -495,20 +496,20 @@
     # atanks
     libreoffice-fresh
     darktable
-    #  heroic
-    # gogdl
-    # legendary-gl
+      heroic
+     gogdl
+     legendary-gl
      nvtopPackages.nvidia
     rpi-imager
     # kdenlive
     # kodi
     # lmms
-    # obs-studio
+    obs-studio
     virt-manager
     tailscale-systray
     appimage-run
-    # steamcmd
-    # steam-tui
+     steamcmd
+     steam-tui
     # kitty
     # hypr
     # rofi
@@ -586,6 +587,15 @@
     mesa-demos
     minicom
     screen
+    hledger
+    hledger-ui
+    hledger-fmt
+    hledger-iadd
+    hledger-utils
+    hledger-interest
+    hledger-check-fancyassertions
+    puffin
+    ledger-autosync
   ];
 
 
@@ -620,14 +630,14 @@
   #    })
   #  ];
 
-#    programs.steam = {
-#    enable = true;
-#    remotePlay.openFirewall =
-#      true; # Open ports in the firewall for Steam Remote Play
-#    dedicatedServer.openFirewall =
-#      true; # Open ports in the firewall for Source Dedicated Server
-#     localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
-#  };
+    programs.steam = {
+    enable = true;
+    remotePlay.openFirewall =
+      true; # Open ports in the firewall for Steam Remote Play
+    dedicatedServer.openFirewall =
+      true; # Open ports in the firewall for Source Dedicated Server
+     localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
+  };
 
 
   # Some programs need SUID wrappers, can be configured further or are
