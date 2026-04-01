@@ -21,13 +21,17 @@
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
  
-
+  environment.pathsToLink = [ "/share/soundfonts" ];
 
   
-  fileSystems."/nfs/srv" = {
-    device = "valerian:/srv";
-    fsType = "nfs";
-    options = [ "x-systemd.idle-timeout=600" "x-systemd.automount" "noauto" ];
+  fileSystems."/valerian" = {
+    device = "huff@192.168.100.222:/srv/media";
+    fsType = "sshfs";
+    options = [ "nodev" 
+                "noatime" 
+                "allow_other"
+                "IdentityFile=/home/huff/.ssh/id_ed25519_valerian"
+              ];
   };
 
 
@@ -210,7 +214,10 @@
   hardware = {
    nvidia = {
     prime = {
-        offload.enable = true; # enable to use intel gpu (hybrid mode)
+      offload = {
+        enable = true; # enable to use intel gpu (hybrid mode)
+        enableOffloadCmd = true;
+      };
        #  sync.enable = true; # enable to use nvidia gpu (discrete mode)
         intelBusId = "PCI:0:2:0";
         nvidiaBusId = "PCI:1:0:0";
@@ -255,7 +262,7 @@
   # };
   
 
-  services.xserver.desktopManager.retroarch.enable = true;
+ # services.xserver.desktopManager.retroarch.enable = true;
 
   
   # Enable CUPS to print documents.
@@ -356,7 +363,8 @@
      # })
      # ];
   };
- 
+  
+
   programs.nixvim = {
     enable = true;
     extraPlugins = with pkgs.vimPlugins; [
@@ -439,7 +447,7 @@
     mc
     gitFull
     tailscale
-    neofetch
+    fastfetch
     usbutils
     dig
     nmap
@@ -459,13 +467,14 @@
    # gimp    # - still held at 2.10 - flatpak at 3.x
     tuxpaint
     gcompris
-    krita
+  #  krita
     inkscape-with-extensions
     alacritty
     # bitwarden
      bottles
     # steam
-    wine-wow
+   # wine-wow
+   wineWowPackages.waylandFull
      lutris
     # cura
     # prusa-slicer
@@ -480,10 +489,10 @@
      protontricks
     transmission-remote-gtk
      steam-rom-manager
-     retroarch-full
+   #  retroarch-full
     # openscad
     audacity
-    # ardour
+     ardour
     # blender
     dia
     drawio
@@ -496,14 +505,14 @@
     # atanks
     libreoffice-fresh
     darktable
-      heroic
-     gogdl
-     legendary-gl
-     nvtopPackages.nvidia
+    heroic
+    gogdl
+    legendary-gl
+    nvtopPackages.nvidia
     rpi-imager
     # kdenlive
     # kodi
-    # lmms
+     lmms
     obs-studio
     virt-manager
     tailscale-systray
@@ -533,7 +542,7 @@
     # helvum
     # libsForQt5.kate
     # raysession
-    # mame
+    mame
    # wireguard-tools
     # quickemu
     jellyfin-mpv-shim
@@ -596,6 +605,16 @@
     hledger-check-fancyassertions
     puffin
     ledger-autosync
+    itgmania
+    rosegarden
+    fluidsynth
+    vmpk
+    soundfont-ydp-grand
+    soundfont-fluid
+    #soundfont-arachno
+    soundfont-generaluser
+    pcsx2
+    rpcs3
   ];
 
 
