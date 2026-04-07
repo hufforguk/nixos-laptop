@@ -144,10 +144,10 @@
   services.displayManager.sddm.wayland.enable = true;
   services.desktopManager.plasma6.enable = true;
 
-    services.hardware.openrgb = { 
-    enable = true; 
-    package = pkgs.openrgb-with-all-plugins; 
-      };
+ #   services.hardware.openrgb = { 
+ #   enable = true; 
+ #   package = pkgs.openrgb-with-all-plugins; 
+ #     };
 
 
  
@@ -188,7 +188,13 @@
  
 
 
-
+ services = {
+   udev = {
+     packages = with pkgs; [
+       game-devices-udev-rules
+     ];
+   };
+ };
 
 #   boot.extraModprobeConfig = ''
 #    blacklist nouveau
@@ -476,7 +482,7 @@
      bottles
     # steam
    # wine-wow
-   wineWowPackages.waylandFull
+   wineWow64Packages.waylandFull
      lutris
     # cura
     # prusa-slicer
@@ -518,7 +524,6 @@
     obs-studio
     virt-manager
     tailscale-systray
-    appimage-run
      steamcmd
      steam-tui
     # kitty
@@ -546,7 +551,7 @@
     # raysession
     mame
    # wireguard-tools
-    # quickemu
+     quickemu
     jellyfin-mpv-shim
     #inputs.nix-gaming.packages.${pkgs.system}.rocket-league
     cargo
@@ -658,7 +663,12 @@
     dedicatedServer.openFirewall =
       true; # Open ports in the firewall for Source Dedicated Server
      localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
-  };
+   };
+
+   programs.appimage = {
+     enable = true;
+     binfmt = true;
+   };
 
 
   # Some programs need SUID wrappers, can be configured further or are
