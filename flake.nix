@@ -10,7 +10,7 @@
     ];
   };
   inputs = {
-    nixpkgs.url = "nixpkgs/nixos-unstable";
+    nixpkgs.url = "nixpkgs/nixos-25.11";
  
 
     nix-gaming.url = "github:fufexan/nix-gaming";
@@ -18,7 +18,7 @@
     m4b-tools.url = "github:sandreas/m4b-tool";
 
     nixvim = {
-      url = "github:nix-community/nixvim";
+      url = "github:nix-community/nixvim/nixos-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

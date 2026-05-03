@@ -220,14 +220,15 @@
   hardware = {
    nvidia = {
     prime = {
-      offload = {
-        enable = true; # enable to use intel gpu (hybrid mode)
-        enableOffloadCmd = true;
-      };
-       #  sync.enable = true; # enable to use nvidia gpu (discrete mode)
+   #   offload = {
+   #     enable = true; # enable to use intel gpu (hybrid mode)
+   #     enableOffloadCmd = true;
+   #   };
+        sync.enable = true; # enable to use nvidia gpu (discrete mode)
         intelBusId = "PCI:0:2:0";
         nvidiaBusId = "PCI:1:0:0";
       };
+      nvidiaSettings = true;
       open = true; 
       modesetting.enable = true;
       powerManagement.enable = true;
@@ -277,8 +278,9 @@
   # Add Brother printer drivers
   services.printing.drivers = [
     pkgs.brlaser
-    pkgs.brgenml1lpr
-    pkgs.brgenml1cupswrapper
+    pkgs.epson-inkjet-printer-escpr2
+   # pkgs.brgnml1lpr
+   # pkgs.brgenml1cupswrapper
     pkgs.cups-dymo
   ];
 
@@ -445,7 +447,7 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-  #  vim-full
+    ## Utilities ##
     home-manager
     nixfmt #-classic # this may change to new version nixfmt - currently as temp nixfmt-rfc-style
     htop
@@ -461,6 +463,18 @@
     nmap
     whois
     monero-gui
+    bridge-utils
+    adwaita-icon-theme
+    font-manager
+    #teams-for-linux
+    #googleearth-pro
+    lm_sensors
+    inxi
+    pciutils
+    ed
+    mesa-demos
+    minicom
+    screen
    #  neovim
     firefox
     evolution
@@ -472,18 +486,19 @@
     # mpvc # - could not get to work?? 
     deja-dup
     duplicity
+    ## graphic editing ##
+
    # gimp    # - still held at 2.10 - flatpak at 3.x
     tuxpaint
-    gcompris
   #  krita
     inkscape-with-extensions
+    
+    ## Educational ##
+
+    gcompris
+
     alacritty
     # bitwarden
-     bottles
-    # steam
-   # wine-wow
-   wineWow64Packages.waylandFull
-     lutris
     # cura
     # prusa-slicer
     # remmina
@@ -546,13 +561,13 @@
     # metasploit
     nextcloud-client
     pavucontrol
-    # helvum
+    # helvumaccumulation
     # libsForQt5.kate
     # raysession
     mame
    # wireguard-tools
      quickemu
-    jellyfin-mpv-shim
+    # jellyfin-mpv-shim
     #inputs.nix-gaming.packages.${pkgs.system}.rocket-league
     cargo
     rustc
@@ -591,18 +606,8 @@
    # epsonscan2
     exiftool
     simple-scan
-    bridge-utils
-    adwaita-icon-theme
-    font-manager
-    #teams-for-linux
-    #googleearth-pro
-    lm_sensors
-    inxi
-    pciutils
-    ed
-    mesa-demos
-    minicom
-    screen
+    
+    ## Accounting ## 
     hledger
     hledger-ui
     hledger-fmt
@@ -612,7 +617,9 @@
     hledger-check-fancyassertions
     puffin
     ledger-autosync
-    itgmania
+    
+    ## Sound/audio editing ##
+
     rosegarden
     fluidsynth
     vmpk
@@ -620,8 +627,17 @@
     soundfont-fluid
     #soundfont-arachno
     soundfont-generaluser
+    
+    ## Gaming ##
+    
+    itgmania
     pcsx2
     rpcs3
+    bottles
+    # steam
+    # wine-wow
+    wineWow64Packages.waylandFull
+    lutris
   ];
 
 
@@ -647,7 +663,16 @@
   ];
   fonts.fontconfig.useEmbeddedBitmaps = true;
   fonts.enableDefaultPackages = true;
-  
+
+  fonts.fontconfig = {
+    defaultFonts = {
+      serif = [  "Liberation Serif"  ];
+      sansSerif = [ "Ubuntu" ];
+      monospace = [ "Ubuntu Mono" ];
+    };
+  };  
+
+
   #nixpkgs.overlays = with pkgs; [
   #    (self: super: {
   #      mpv-unwrapped = super.mpv-unwrapped.override {
