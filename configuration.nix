@@ -223,8 +223,8 @@
    #   offload = {
    #     enable = true; # enable to use intel gpu (hybrid mode)
    #     enableOffloadCmd = true;
-   #   };
-        sync.enable = true; # enable to use nvidia gpu (discrete mode)
+   #   }
+  #     sync.enable = true; # enable to use nvidia gpu (discrete mode) -No! Don't use - x11 only!
         intelBusId = "PCI:0:2:0";
         nvidiaBusId = "PCI:1:0:0";
       };
@@ -278,7 +278,8 @@
   # Add Brother printer drivers
   services.printing.drivers = [
     pkgs.brlaser
-    pkgs.epson-inkjet-printer-escpr2
+    #pkgs.epson-inkjet-printer-escpr2
+    pkgs.epson-escpr
    # pkgs.brgnml1lpr
    # pkgs.brgenml1cupswrapper
     pkgs.cups-dymo
@@ -599,7 +600,9 @@
     onlyoffice-desktopeditors
     wireplumber
     brlaser
-    freecad-wayland
+   # epson-inkjet-printer-escpr2
+    epson-escpr
+   freecad-wayland
    #  adobe-reader
     kdePackages.skanpage
     kdePackages.skanlite
