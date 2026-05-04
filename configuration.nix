@@ -7,15 +7,15 @@
 {
   imports = [ # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    inputs.home-manager.nixosModules.home-manager
+#    inputs.home-manager.nixosModules.home-manager
     # ./scanner.nix
     inputs.nixvim.nixosModules.nixvim
     inputs.nix-gaming.nixosModules.pipewireLowLatency
   ];
-  home-manager = {
-    extraSpecialArgs = { inherit inputs; };
-    users = { huff = import ./home-manager/home.nix; };
-  };
+#  home-manager = {
+#    extraSpecialArgs = { inherit inputs; };
+#    users = { huff = import ./home-manager/home.nix; };
+#  };
   
   programs.gamemode.enable = true;
 
