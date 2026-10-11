@@ -10,15 +10,18 @@
     ];
   };
   inputs = {
-    nixpkgs.url = "nixpkgs/nixos-25.11";
+    nixpkgs.url = "nixpkgs/nixos-26.05";
  
 
     nix-gaming.url = "github:fufexan/nix-gaming";
     
     m4b-tools.url = "github:sandreas/m4b-tool";
+    
+    vpinball-flake.url = "github:raiford/vpinball-flake";
+    vpinball-flake.inputs.nixpkgs.follows = "nixpkgs";
 
     nixvim = {
-      url = "github:nix-community/nixvim/nixos-25.11";
+      url = "github:nix-community/nixvim/nixos-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -29,7 +32,7 @@
 
   };
 
-  outputs = { self, nixpkgs, ... }@inputs:
+  outputs = { self, nixpkgs, vpinball-flake, ... }@inputs:
     let lib = nixpkgs.lib;
     in {
 
@@ -39,6 +42,11 @@
           system = "x86_64-linux";
           modules = [ 
             ./configuration.nix 
+            {
+              nixpkgs.overlays = [ vpinball-flake.overlays.default ];
+              nixpkgs.config.allowUnfree = true;  # Required for pinmame
+            }
+
           ];
         };
       };

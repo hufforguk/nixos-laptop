@@ -50,16 +50,19 @@
   boot.zfs.requestEncryptionCredentials = true;
   # boot.supportedFilesystems = [ "ntfs" ];
   # boot.kernelPackages = pkgs.linuxPackages_zen;
+  boot.kernel.sysctl = {
+    "vm.max_map_count" = 2147483642;
+   };
   boot.loader.grub.memtest86.enable = true;
   boot.initrd.systemd.enable = true;
   boot.plymouth.enable = true;
-
+  
   #additional droidcam items
   boot.extraModulePackages = with config.boot.kernelPackages; [
     v4l2loopback
   ];
   boot.extraModprobeConfig = ''options v4l2loopback devices=1 video_nr=1 card_label="OBS Cam" exclusive_caps=1
-   blacklist nouveau
+   blacklist nouveau  
    options nouveau modeset=0
   '';
   security.polkit.enable = true;
@@ -93,7 +96,7 @@
     openFirewall = true;
   };
 
-  services.i2p.enable = true;
+  #services.i2p.enable = true;
 
   programs.nix-ld.enable = true;
   programs.nix-ld.libraries = with pkgs; [
@@ -102,7 +105,7 @@
 
   ];
 
-  powerManagement.enable = true;
+#  powerManagement.enable = true;
 
   networking.hostName = "huff-nixos-laptop"; # Define your hostname.
   # Pick only one of the below networking options.
@@ -197,21 +200,21 @@
  };
 
 #   boot.extraModprobeConfig = ''
-#    blacklist nouveau
-#    options nouveau modeset=0
+#   blacklist nouveau
+#  options nouveau modeset=0
 #  '';
-  
-#  services.udev.extraRules = ''
-#    # Remove NVIDIA USB xHCI Host Controller devices, if present
-#    ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x0c0330", ATTR{power/control}="auto", ATTR{remove}="1"
-#    # Remove NVIDIA USB Type-C UCSI devices, if present
-#    ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x0c8000", ATTR{power/control}="auto", ATTR{remove}="1"
-#    # Remove NVIDIA Audio devices, if present
-#    ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x040300", ATTR{power/control}="auto", ATTR{remove}="1"
-#    # Remove NVIDIA VGA/3D controller devices
-#    ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x03[0-9]*", ATTR{power/control}="auto", ATTR{remove}="1"
-#  '';
-#  boot.blacklistedKernelModules = [ "nouveau" "nvidia" "nvidia_drm" "nvidia_modeset" ];
+ 
+  services.udev.extraRules = ''
+    # Remove NVIDIA USB xHCI Host Controller devices, if present
+    ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x0c0330", ATTR{power/control}="auto", ATTR{remove}="1"
+    # Remove NVIDIA USB Type-C UCSI devices, if present
+    ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x0c8000", ATTR{power/control}="auto", ATTR{remove}="1"
+    # Remove NVIDIA Audio devices, if present
+    ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x040300", ATTR{power/control}="auto", ATTR{remove}="1"
+    # Remove NVIDIA VGA/3D controller devices
+    ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x03[0-9]*", ATTR{power/control}="auto", ATTR{remove}="1"
+  '';
+ # boot.blacklistedKernelModules = [ "nouveau" "nvidia" "nvidia_drm" "nvidia_modeset" ];
 
 
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
@@ -220,18 +223,18 @@
   hardware = {
    nvidia = {
     prime = {
-   #   offload = {
-   #     enable = true; # enable to use intel gpu (hybrid mode)
-   #     enableOffloadCmd = true;
-   #   }
+      offload = {
+        enable = true; # enable to use intel gpu (hybrid mode)
+        enableOffloadCmd = true;
+     };
   #     sync.enable = true; # enable to use nvidia gpu (discrete mode) -No! Don't use - x11 only!
         intelBusId = "PCI:0:2:0";
         nvidiaBusId = "PCI:1:0:0";
       };
       nvidiaSettings = true;
       open = true; 
-      modesetting.enable = true;
-      powerManagement.enable = true;
+   #   modesetting.enable = true;
+  #    powerManagement.enable = false;
     };
 
     graphics = {
@@ -243,7 +246,7 @@
         libvdpau-va-gl
         nvidia-vaapi-driver
       ];
- #     enable32Bit = true;
+     enable32Bit = true;
     };
   };
   #  environment.systemPackages = [
@@ -324,9 +327,9 @@
   virtualisation.libvirtd.enable = true;
   virtualisation.libvirtd.qemu.vhostUserPackages = with pkgs; [ virtiofsd ];
   virtualisation.spiceUSBRedirection.enable = true;
- # virtualisation.virtualbox.host.enable = true;
- # virtualisation.virtualbox.host.enableExtensionPack = true;
- #  users.extraGroups.vboxusers.members = [ "huff" ];
+  virtualisation.virtualbox.host.enable = true;
+  virtualisation.virtualbox.host.enableExtensionPack = true;
+   users.extraGroups.vboxusers.members = [ "huff" ];
  virtualisation.waydroid.enable = true;
 
   programs.dconf.enable = true;
@@ -513,12 +516,13 @@
      protontricks
     transmission-remote-gtk
      steam-rom-manager
+    dolphin-emu
    #  retroarch-full
     # openscad
     audacity
      ardour
     # blender
-    dia
+   # dia
     drawio
     # librecad
     # sweethome3d.application
@@ -532,7 +536,7 @@
     heroic
     gogdl
     legendary-gl
-    nvtopPackages.nvidia
+  #  nvtopPackages.nvidia
     rpi-imager
     # kdenlive
     # kodi
@@ -557,6 +561,7 @@
     panotools
     scantailor-advanced
     virtiofsd
+    unrar-wrapper
     # opensc
     # patchelf
     # metasploit
@@ -609,6 +614,7 @@
    # epsonscan2
     exiftool
     simple-scan
+    v4l-utils
     
     ## Accounting ## 
     hledger
@@ -637,10 +643,15 @@
     pcsx2
     rpcs3
     bottles
-    # steam
-    # wine-wow
+     steam
+   #  wine-wow
     wineWow64Packages.waylandFull
     lutris
+    # visual pinball
+    vpinball
+    vpinfe
+    vpxtool
+    vpx-editor
   ];
 
 
