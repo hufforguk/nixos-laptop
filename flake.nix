@@ -18,7 +18,6 @@
     m4b-tools.url = "github:sandreas/m4b-tool";
     
     vpinball-flake.url = "github:raiford/vpinball-flake";
-    vpinball-flake.inputs.nixpkgs.follows = "nixpkgs";
 
     nixvim = {
       url = "github:nix-community/nixvim/nixos-26.05";

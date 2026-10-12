@@ -648,10 +648,10 @@
     wineWow64Packages.waylandFull
     lutris
     # visual pinball
-    vpinball
-    vpinfe
-    vpxtool
-    vpx-editor
+    (inputs.vpinball-flake.packages.${pkgs.system}.vpinball)
+    (inputs.vpinball-flake.packages.${pkgs.system}.vpinfe)
+    (inputs.vpinball-flake.packages.${pkgs.system}.vpxtool)
+    (inputs.vpinball-flake.packages.${pkgs.system}.vpx-editor)
   ];
 
 
